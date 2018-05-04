@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="fruit" class="com.example.demo.Fruit"></bean>
+
+
+	<bean id="vegetable" class="com.example.demo.Vegetable">
+		<constructor-arg index="0" value="Tomato"></constructor-arg>
+	</bean>
+	<bean id="vegetableName" class="com.example.demo.Vegetable">
+		<property name="myName" value="brocolli"></property>
+	</bean>
+	<bean id="fruitWithListAndMap" class="com.example.demo.Fruit">
+		<property name="fruitNameList">
+			<list>
+				<value>Apple</value>
+				<value>Banana</value>
+				<value>orange</value>
+			</list>
+		</property>
+		<property name="fruitNameMap">
+			<map>
+				<entry key="apple" value="red" />
+				<entry key="banana" value="yellow" />
+				<entry key="orange" value="orange" />
+			</map>
+		</property>
+	</bean>
+	<bean id="vegUsingPNamespace" class="com.example.demo.Vegetable" p:myName="Squash"></bean>
+	<context:property-placeholder location="src/main/java/myApp.properties"/>
+	
+	<bean id="externalVeg" class="com.example.demo.Vegetable">
+		<property name="myName" value="${def-veg}"/>
+	</bean>
+	
+	<bean id="vegetableLife" class="com.example.demo.Vegetable" init-method="initMethod" destroy-method="destroyMethod">
+		<property name="myName" value="${def-veg}"/>
+	</bean>
+
+</beans>
